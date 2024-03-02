@@ -1,4 +1,4 @@
-class Constants:
+class Urls:
     URL = 'https://stellarburgers.nomoreparties.site/'
     URL_LOGIN = 'https://stellarburgers.nomoreparties.site/login'
     URL_PROFILE = 'https://stellarburgers.nomoreparties.site/account/profile'
@@ -9,8 +9,21 @@ class Constants:
     URL_INGREDIENTS = 'https://stellarburgers.nomoreparties.site/ingredient/'
 
 
-class APIConstants:
+class APIUrls:
 
     url_create_user = 'https://stellarburgers.nomoreparties.site/api/auth/register'
     url_user = 'https://stellarburgers.nomoreparties.site/api/auth/user'
 
+
+class Data:
+
+    data_register = {
+        "email": "Ilya92@yandex.ru",
+        "password": "Il1992",
+        "name": "Ilya"
+    }
+
+    data_login = {
+        "email": "Ilya92@yandex.ru",
+        "password": "Il1992"
+    }

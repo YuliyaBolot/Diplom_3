@@ -6,7 +6,9 @@ from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 import pytest
 import requests
-from constants import APIConstants
+from constants import APIUrls
+from constants import Data
+from constants import Urls
 
 
 @pytest.fixture(params=['chrome', 'firefox'])
@@ -26,15 +28,16 @@ def driver(request):
 
 @pytest.fixture(scope='function')
 def prepare_user():
-    user = {
-        "email": "Ilya92@yandex.ru",
-        "password": "Il1992",
-        "name": "Ilya"
-    }
-    response = requests.post(APIConstants.url_create_user, data=user)
+    user = Data.data_register
+    response = requests.post(APIUrls.url_create_user, data=user)
     token = response.json()["accessToken"]
     yield prepare_user
-    requests.delete(APIConstants.url_user, headers={'Authorization': token})
+    requests.delete(APIUrls.url_user, headers={'Authorization': token})
 
+
+@pytest.fixture(scope='function')
+def login_user(driver, prepare_user):
+    driver.get(Urls.URL_LOGIN)
+    user = Data.data_login
 
 

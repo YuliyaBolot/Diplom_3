@@ -2,7 +2,7 @@ import allure
 from pages.order_tape_page import OrderTapePage
 from pages.main_page import MainPage
 from pages.private_office_page import PrivateOfficePage
-from constants import Constants
+from constants import Urls
 
 
 class TestOrderTape:
@@ -10,7 +10,7 @@ class TestOrderTape:
     @allure.title('Проверка появления всплывающего окна с деталями заказа')
     def test_appearance_order_window(self, driver):
         order = OrderTapePage(driver)
-        order.go_to_site(Constants.URL_ORDER_PAGE)
+        order.go_to_site(Urls.URL_ORDER_PAGE)
         order.loading_order_page()
         order.click_on_order()
         order.wait_for_order_window()
@@ -25,7 +25,7 @@ class TestOrderTape:
                         '4.Проверить, что данный номер заказа отображается в разделе «Лента заказов».')
     def test_client_can_find_order_in_history_and_in_tape(self, prepare_user, driver):
         user = PrivateOfficePage(driver)
-        user.go_to_site(Constants.URL_LOGIN)
+        user.go_to_site(Urls.URL_LOGIN)
         email = "Ilya92@yandex.ru"
         password = "Il1992"
         user.login_to_private_account(email, password)
@@ -50,7 +50,7 @@ class TestOrderTape:
                         '5.Проверить, что значение общего счетчика заказов увеличилось на 1')
     def test_increase_counter_for_all_orders(self, prepare_user, driver):
         user = PrivateOfficePage(driver)
-        user.go_to_site(Constants.URL_LOGIN)
+        user.go_to_site(Urls.URL_LOGIN)
         email = "Ilya92@yandex.ru"
         password = "Il1992"
         user.login_to_private_account(email, password)
@@ -76,7 +76,7 @@ class TestOrderTape:
                         '5.Проверить, что значение счетчика заказов за сегодня увеличилось на 1')
     def test_increase_counter_for_today_orders(self, prepare_user, driver):
         user = PrivateOfficePage(driver)
-        user.go_to_site(Constants.URL_LOGIN)
+        user.go_to_site(Urls.URL_LOGIN)
         email = "Ilya92@yandex.ru"
         password = "Il1992"
         user.login_to_private_account(email, password)
@@ -101,7 +101,7 @@ class TestOrderTape:
                         '4.Проверяем, что номер заказа появился в разделе «В работе».')
     def test_get_number_from_section_in_progress(self, prepare_user, driver):
         user = PrivateOfficePage(driver)
-        user.go_to_site(Constants.URL_LOGIN)
+        user.go_to_site(Urls.URL_LOGIN)
         email = "Ilya92@yandex.ru"
         password = "Il1992"
         user.login_to_private_account(email, password)
