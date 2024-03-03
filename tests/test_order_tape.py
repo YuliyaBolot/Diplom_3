@@ -23,16 +23,12 @@ class TestOrderTape:
                         '2.Создать заказ.'
                         '3.Получить номер заказа из раздела «История заказов».'
                         '4.Проверить, что данный номер заказа отображается в разделе «Лента заказов».')
-    def test_client_can_find_order_in_history_and_in_tape(self, prepare_user, driver):
-        user = PrivateOfficePage(driver)
-        user.go_to_site(Urls.URL_LOGIN)
-        email = "Ilya92@yandex.ru"
-        password = "Il1992"
-        user.login_to_private_account(email, password)
+    def test_client_can_find_order_in_history_and_in_tape(self, prepare_user, login_user, driver):
         main = MainPage(driver)
-        main.create_order(driver)
+        main.create_order()
         main.click_on_close_cross()
         main.click_on_private_office_button()
+        user = PrivateOfficePage(driver)
         user.loading_profile_page()
         user.go_to_history_order()
         order = OrderTapePage(driver)
@@ -48,12 +44,7 @@ class TestOrderTape:
                         '3.Создать заказ.'
                         '4.Получить значение общего счетчика заказов ПОСЛЕ создания заказа.'
                         '5.Проверить, что значение общего счетчика заказов увеличилось на 1')
-    def test_increase_counter_for_all_orders(self, prepare_user, driver):
-        user = PrivateOfficePage(driver)
-        user.go_to_site(Urls.URL_LOGIN)
-        email = "Ilya92@yandex.ru"
-        password = "Il1992"
-        user.login_to_private_account(email, password)
+    def test_increase_counter_for_all_orders(self, prepare_user, login_user, driver):
         main = MainPage(driver)
         main.loading_main_page()
         main.click_on_orders_tape()
@@ -61,7 +52,7 @@ class TestOrderTape:
         order = OrderTapePage(driver)
         counter_orders_before = order.get_counter_for_all_orders()
         main.click_on_constructor_logo()
-        main.create_order(driver)
+        main.create_order()
         main.click_on_close_cross()
         main.go_to_order_tape()
         counter_order_after = order.get_counter_for_all_orders()
@@ -74,12 +65,7 @@ class TestOrderTape:
                         '3.Создать заказ.'
                         '4.Получить значение счетчика заказов за чегодня ПОСЛЕ создания заказа.'
                         '5.Проверить, что значение счетчика заказов за сегодня увеличилось на 1')
-    def test_increase_counter_for_today_orders(self, prepare_user, driver):
-        user = PrivateOfficePage(driver)
-        user.go_to_site(Urls.URL_LOGIN)
-        email = "Ilya92@yandex.ru"
-        password = "Il1992"
-        user.login_to_private_account(email, password)
+    def test_increase_counter_for_today_orders(self, prepare_user, login_user, driver):
         main = MainPage(driver)
         main.loading_main_page()
         main.click_on_orders_tape()
@@ -87,7 +73,7 @@ class TestOrderTape:
         order = OrderTapePage(driver)
         counter_today_before = order.get_counter_for_today_orders()
         main.click_on_constructor_logo()
-        main.create_order(driver)
+        main.create_order()
         main.click_on_close_cross()
         main.go_to_order_tape()
         counter_today_after = order.get_counter_for_today_orders()
@@ -99,14 +85,9 @@ class TestOrderTape:
                         '2.Создать заказ.'
                         '3.Получаем номер заказа.'
                         '4.Проверяем, что номер заказа появился в разделе «В работе».')
-    def test_get_number_from_section_in_progress(self, prepare_user, driver):
-        user = PrivateOfficePage(driver)
-        user.go_to_site(Urls.URL_LOGIN)
-        email = "Ilya92@yandex.ru"
-        password = "Il1992"
-        user.login_to_private_account(email, password)
+    def test_get_number_from_section_in_progress(self, prepare_user, login_user, driver):
         main = MainPage(driver)
-        main.create_order(driver)
+        main.create_order()
         order = OrderTapePage(driver)
         number_from_pop_up = order.get_number_from_pop_up_window()
         main.click_on_close_cross()

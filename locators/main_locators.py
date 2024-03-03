@@ -7,7 +7,7 @@ class MainLocators:
     MAIN_PAGE = (By.XPATH, ".//main[@class = 'App_componentContainer__2JC2W']")
 
     # Кнопка входа в «Личный кабинет»
-    PRIVATE_OFFICE_BUTTON = (By.XPATH, ".//a[@class ='AppHeader_header__link__3D_hX']/p[text()='Личный Кабинет']")
+    PRIVATE_OFFICE_BUTTON = (By.XPATH, ".//a[@href = '/account']/p[text()='Личный Кабинет']")
 
     # Кнопка «Конструктор»
     CONSTRUCTOR_BUTTON = (By.XPATH, ".//li/a[@href= '/']")

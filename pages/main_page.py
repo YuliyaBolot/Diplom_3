@@ -45,17 +45,13 @@ class MainPage(BasePage):
     def wait_close_ingredient_details(self):
         return self.find_element_located(MainLocators.CLOSE_INGREDIENT_DETAILS)
 
-    @allure.step("Находим ингредиент")
-    def find_ingredient(self):
-        return self.find_element_located(MainLocators.INGREDIENT)
-
-    @allure.step("Находим булку")
-    def find_ingredient_bun(self):
-        return self.find_element_located(MainLocators.INGREDIENT_BUN)
-
     @allure.step("Добавляем ингредиент в заказ")
-    def add_to_order(self):
-        return self.find_element_located(MainLocators.ORDER_BASKET)
+    def drag_and_drop_ingredient(self):
+        return self.drag_and_drop(MainLocators.INGREDIENT, MainLocators.ORDER_BASKET)
+
+    @allure.step("Добавляем булку в заказ")
+    def drag_and_drop_bun(self):
+        return self.drag_and_drop(MainLocators.INGREDIENT_BUN, MainLocators.ORDER_BASKET)
 
     @allure.step("Ожидаем появления ингредиента в заказе")
     def wait_appearance_ingredient_in_order(self):
@@ -78,14 +74,10 @@ class MainPage(BasePage):
         return self.find_element_located(MainLocators.POP_UP_WINDOW, time=30)
 
     @allure.step("Создаем заказ")
-    def create_order(self, driver):
+    def create_order(self):
         self.loading_main_page()
-        ingredient_filling = self.find_ingredient()
-        add_to_order = self.add_to_order()
-        self.drag_and_drop(ingredient_filling, add_to_order).perform()
-        ingredient_bun = self.find_ingredient_bun()
-        add_to_order_bun = self.add_to_order()
-        self.drag_and_drop(ingredient_bun, add_to_order_bun).perform()
+        self.drag_and_drop_ingredient()
+        self.drag_and_drop_bun()
         self.click_on_create_order_button()
         self.wait_for_order_pop_up_window()
 

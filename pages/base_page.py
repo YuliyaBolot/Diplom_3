@@ -6,9 +6,9 @@ from selenium.webdriver import ActionChains
 
 class BasePage:
 
+    @allure.step("Инициализируем драйвер")
     def __init__(self, driver):
         self.driver = driver
-
 
     @allure.step("Открываем страницу {url}")
     def go_to_site(self, url):
@@ -25,9 +25,11 @@ class BasePage:
             expected_conditions.element_to_be_clickable(locator)).click()
 
     @allure.step("Добавляем ингредиент в заказ")
-    def drag_and_drop(self, driver, locator):
-        ActionChains(driver).drag_and_drop(self.find_element_located(locator), self.find_element_located(locator)).perform()
+    def drag_and_drop(self, locator_take, locator_put):
+        return ActionChains(self.driver).drag_and_drop(self.find_element_located(locator_take),
+                                                       self.find_element_located(locator_put)).perform()
 
     @allure.step("Получаем текущую страницу приложения")
     def current_url(self):
         return self.driver.current_url
+

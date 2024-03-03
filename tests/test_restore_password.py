@@ -17,8 +17,9 @@ class TestRestorePassword:
         restore = RestorePasswordPage(driver)
         restore.click_on_restore_password_link()
         restore.loading_forgot_password_page()
+        current_url = restore.current_url()
 
-        assert Urls.URL_FORGOT_PASSWORD == restore.current_url
+        assert Urls.URL_FORGOT_PASSWORD == current_url
 
     @allure.title('Проверка перехода на страницу сброса пароля при вводе email')
     def test_input_email(self, driver):
@@ -29,8 +30,9 @@ class TestRestorePassword:
         restore.set_email(email)
         restore.click_on_restore_button()
         restore.loading_field_for_code()
+        current_url = restore.current_url()
 
-        assert Urls.URL_RESET_PASSWORD == restore.current_url
+        assert Urls.URL_RESET_PASSWORD == current_url
 
     @allure.title('Проверка активации поля для ввода пароля')
     def test_active_password_field(self, driver):

@@ -25,13 +25,6 @@ class PrivateOfficePage(BasePage):
     def loading_profile_page(self):
         return self.find_element_located(PrivateOfficeLocators.PRIVATE_OFFICE_PAGE)
 
-    @allure.step("Заходим в личный кабинет")
-    def login_to_private_account(self, email, password):
-        self.loading_login_page()
-        self.set_email(email)
-        self.set_password(password)
-        self.click_on_enter_button()
-
     @allure.step("Нажимаем на кнопку 'История заказов'")
     def click_on_history_order(self):
         return self.find_element_located_click(PrivateOfficeLocators.HISTORY_ORDER)
